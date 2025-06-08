@@ -1,21 +1,11 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./app/**/*.{ts,tsx}",
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      fontFamily: {
-        sans: "var(--font-sans)",
-        mono: "var(--font-mono)",
-      },
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
-    },
+    extend: {},
   },
   plugins: [],
-};
+}
