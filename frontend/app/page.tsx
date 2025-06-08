@@ -1,42 +1,38 @@
-// If you’re using Next.js 13+ with App Router, put this in /app/page.tsx
-// If using Pages Router, put it in /pages/index.tsx
-
 export default function Home() {
   return (
-    <main className="relative flex min-h-screen items-center justify-center bg-black">
-      {/* Background Image */}
+    <main className="relative flex min-h-screen items-center justify-center bg-neutral-900">
       <img
-        src="/estate.jpg" // Or use an external URL
+        src="estate2.avif"
         alt="Luxury estate"
-        className="absolute inset-0 h-full w-full object-cover opacity-60 z-0"
+        className="absolute inset-0 h-full w-full object-cover opacity-100 z-0"
       />
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40 z-10" />
-      {/* Content */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-neutral-900/70 z-10" />
       <div className="relative z-20 flex flex-col items-center px-4">
-        <h1 className="text-white text-4xl md:text-6xl font-serif font-bold text-center drop-shadow-lg mb-6">
-          Estate inventory management<br />
-          made simple.
+        <h1 className="text-white text-5xl md:text-7xl font-serif font-extralight text-center mb-6 tracking-wide">
+          Gilded Grove
         </h1>
-        <p className="text-white text-xl md:text-2xl text-center mb-8 font-light">
-          Luxury estate software to effortlessly manage your assets
+        <p className="text-gray-200 text-2xl md:text-3xl text-center mb-12 font-light max-w-2xl">
+          Discreet, intelligent estate management—tailored for those who value privacy, order, and time.
         </p>
-        <form className="flex w-full max-w-md">
-          <input
-            type="email"
-            required
-            placeholder="Enter your email"
-            className="rounded-l-md px-4 py-3 flex-1 text-lg outline-none"
-            style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0 }}
-          />
-          <button
-            type="submit"
-            className="bg-neutral-900 hover:bg-neutral-800 text-white font-semibold px-6 py-3 rounded-r-md text-lg transition-colors"
-            style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
-          >
-            Sign up
-          </button>
-        </form>
+        <div className="w-full max-w-xl bg-neutral-900/95 border border-gray-200/30 rounded-2xl px-10 py-10 flex flex-col items-center">
+          <p className="text-gray-100 text-lg text-center font-light mb-6">
+            Early access is available by invitation only.
+          </p>
+          <form className="flex w-full">
+            <input
+              type="email"
+              required
+              placeholder="Request a private invitation"
+              className="flex-1 bg-transparent border-b border-gray-400/40 text-xl text-gray-100 placeholder-gray-400 px-2 py-3 focus:outline-none focus:border-platinum transition-all"
+            />
+            <button
+              type="submit"
+              className="ml-4 px-8 py-3 bg-gradient-to-r from-gray-300 to-gray-100 text-neutral-900 font-medium rounded-full shadow-none hover:from-gray-200 hover:to-gray-100 transition-all"
+            >
+              Request Access
+            </button>
+          </form>
+        </div>
       </div>
     </main>
   );
