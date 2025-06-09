@@ -1,40 +1,46 @@
 export default function Home() {
   return (
-    <main className="relative min-h-screen w-full font-sans text-neutral-900 overflow-hidden">
-      {/* Background image rendered via <img> */}
+    <main className="relative min-h-screen w-full font-sans text-white overflow-hidden">
+      {/* Background image */}
       <img
         src="/estate2.avif"
-        alt="Estate"
+        alt="Luxury estate"
         className="absolute inset-0 w-full h-full object-cover z-0"
       />
 
-      {/* Opaque black overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-60 z-10" />
+      {/* Simple dark overlay */}
+      <div className="absolute inset-0 bg-black/60 z-10" />
 
       {/* Foreground content */}
       <div className="relative z-20 flex items-center justify-center min-h-screen px-4">
-        <div className="bg-white rounded-lg shadow-2xl max-w-md w-full p-8">
-          <h1 className="text-2xl font-semibold text-gray-900 text-center mb-2">
-            Welcome to Gilded Grove
-          </h1>
-          <p className="text-center text-gray-700 mb-6 leading-relaxed">
-            A modern estate inventory system for families, advisors, and households
-            with too much to track — and too much to lose.
-          </p>
-          <form className="flex flex-col items-center space-y-4">
+        <section className="bg-[rgba(0,0,0,0.7)] backdrop-blur-sm rounded-xl shadow-lg w-full max-w-[420px] p-6 sm:p-8 border border-white/10 space-y-6">
+          <header className="text-center space-y-2">
+            <h1 className="text-2xl font-serif font-medium text-white tracking-tight">
+              Gilded Grove
+            </h1>
+            <p className="text-neutral-300 text-sm leading-relaxed">
+              Discreet estate inventory software for families, advisors, and professionals
+              with too much to track — and too much to lose.
+            </p>
+          </header>
+
+          <form className="space-y-4" noValidate>
             <input
+              id="email"
               type="email"
-              placeholder="you@example.com"
-              className="w-11/12 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+              name="email"
+              placeholder="Your email address"
+              required
+              className="w-full px-4 py-3 text-sm border border-neutral-700 rounded-md bg-neutral-800 text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#d6b86b] transition"
             />
             <button
               type="submit"
-              className="w-11/12 py-2 px-4 bg-black text-white rounded-md hover:bg-gray-800 transition"
+              className="w-full py-3 px-6 bg-white text-black rounded-md hover:bg-neutral-200 transition text-sm font-medium tracking-wide"
             >
-              Request Early Access
+              Request Private Access
             </button>
           </form>
-        </div>
+        </section>
       </div>
     </main>
   );
