@@ -1,15 +1,16 @@
 export default function Home() {
   return (
     <main className="relative min-h-screen w-full font-sans text-white overflow-hidden">
-      {/* Background image */}
+      {/* Background image absolutely positioned */}
       <img
         src="/estate2.avif"
         alt="Luxury estate"
-        className="absolute inset-0 w-full h-full object-cover z-0"
+        className="absolute inset-0 w-full h-full object-cover opacity-40"
+        style={{ filter: "blur(2px)" }}
       />
 
-      {/* Simple dark overlay */}
-      <div className="absolute inset-0 bg-black/60 z-10" />
+      {/* The dimming overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-90"></div>
 
       {/* Foreground content */}
       <div className="relative z-20 flex items-center justify-center min-h-screen px-4">
