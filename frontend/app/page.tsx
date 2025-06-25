@@ -12,8 +12,8 @@ export default function Home() {
         className="object-cover z-0"
       />
 
-      {/* Simple dark overlay */}
-      <div className="absolute inset-0 bg-black/60 z-10" />
+      {/* The dimming overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-90"></div>
 
       {/* Foreground content */}
       <div className="relative z-20 flex items-center justify-center min-h-screen px-4">
