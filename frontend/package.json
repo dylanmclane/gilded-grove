@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "mongodb": "^6.17.0",
     "next": "15.3.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "resend": "^4.6.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -30,6 +32,6 @@
     "typescript": "^5"
   },
   "engines": {
-  "node": "20.x"
-}
+    "node": "20.x"
+  }
 }
