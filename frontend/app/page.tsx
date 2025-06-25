@@ -1,11 +1,15 @@
+import Image from "next/image";
+
 export default function Home() {
   return (
-    <main className="relative min-h-screen w-full font-sans text-white overflow-hidden">
+    <main className="relative min-h-screen w-full font-sans overflow-hidden">
       {/* Background image */}
-      <img
+      <Image
         src="/estate2.avif"
         alt="Luxury estate"
-        className="absolute inset-0 w-full h-full object-cover z-0"
+        fill
+        priority
+        className="object-cover z-0"
       />
 
       {/* Simple dark overlay */}
@@ -25,14 +29,19 @@ export default function Home() {
           </header>
 
           <form className="space-y-4" noValidate>
-            <input
-              id="email"
-              type="email"
-              name="email"
-              placeholder="Your email address"
-              required
-              className="w-full px-4 py-3 text-sm border border-neutral-700 rounded-md bg-neutral-800 text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#d6b86b] transition"
-            />
+            <div>
+              <label htmlFor="email" className="sr-only">
+                Email address
+              </label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="Your email address"
+                required
+                className="w-full px-4 py-3 text-sm border border-neutral-700 rounded-md bg-neutral-800 text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#d6b86b] transition"
+              />
+            </div>
             <button
               type="submit"
               className="w-full py-3 px-6 bg-white text-black rounded-md hover:bg-neutral-200 transition text-sm font-medium tracking-wide"
