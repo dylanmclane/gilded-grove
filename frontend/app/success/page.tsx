@@ -22,13 +22,13 @@ export default function SuccessPage() {
                 Access Requested
               </h1>
               <p className="text-neutral-300 text-sm leading-relaxed">
-                Thank you for your interest in Gilded Grove. We've received your request and will be in touch soon with private access details.
+                Thank you for your interest in Gilded Grove. We&apos;ve received your request and will be in touch soon with private access details.
               </p>
             </header>
 
             <div className="pt-4 space-y-3">
               <p className="text-xs text-neutral-400">
-                You'll receive an email confirmation shortly.
+                You&apos;ll receive an email confirmation shortly.
               </p>
               
               <Link 
