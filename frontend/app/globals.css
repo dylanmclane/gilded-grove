@@ -49,3 +49,78 @@ body {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0px); }
 }
+
+/* Shine animation for luxury text (sweep, text only) */
+.shine-text {
+  display: inline-block;
+  font-family: var(--font-playfair), serif;
+  font-weight: bold;
+  font-size: 2.5rem;
+  background: linear-gradient(120deg, #d6b86b 0%, #e0e0e0 30%, #fff 50%, #e0e0e0 70%, #d6b86b 100%);
+  background-size: 200% 100%;
+  background-position: -100% 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  animation: shine-text-shimmer 2.7s cubic-bezier(0.4,0.0,0.2,1) infinite;
+}
+@keyframes shine-text-shimmer {
+  0% { background-position: -100% 0; }
+  20% { background-position: 120% 0; }
+  21%, 100% { background-position: 120% 0; }
+}
+
+/* Sustainable green for input focus and ring */
+.input:focus, .input.input-primary:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(34 139 34 / var(--tw-border-opacity)); /* #228B22 */
+  box-shadow: 0 0 0 2px rgba(34,139,34,0.18) !important;
+  outline: 2px solid #228B22 !important;
+  outline-offset: 0px !important;
+}
+
+/* Override Tailwind ring utilities for input */
+.input:focus-visible, .input.input-primary:focus-visible {
+  --tw-ring-color: #228B22 !important;
+  --tw-ring-opacity: 0.25 !important;
+  box-shadow: 0 0 0 2px rgba(34,139,34,0.18), 0 0 0 4px rgba(34,139,34,0.25) !important;
+}
+
+/* Sustainable green for primary button */
+.btn-primary {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 139 34 / var(--tw-bg-opacity)); /* #228B22 */
+  --tw-border-opacity: 1;
+  border-color: rgb(34 139 34 / var(--tw-border-opacity));
+  color: #fffbe6;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -60%;
+  width: 160%; height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, #ffe9b3 40%, #d6b86b 50%, #ffe9b3 60%, rgba(255,255,255,0) 100%);
+  opacity: 0.0;
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.2s;
+}
+.btn-primary:hover::before, .btn-primary:focus::before {
+  opacity: 1;
+  animation: btn-gold-shimmer 1.1s cubic-bezier(0.4,0.0,0.2,1) 1;
+}
+@keyframes btn-gold-shimmer {
+  0% { left: -60%; }
+  80% { left: 100%; }
+  100% { left: 100%; }
+}
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #256d1b;
+  border-color: #256d1b;
+  color: #fffbe6;
+  box-shadow: 0 2px 16px 0 rgba(34,139,34,0.18);
+}

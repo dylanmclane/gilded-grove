@@ -108,21 +108,14 @@ export default function Home() {
                }}>
             {/* Dark overlay for better readability */}
             <div className="absolute inset-0 bg-black/40 rounded-xl"></div>
-            <div className="card-body p-8 relative z-10">
+            <div className="card-body p-5 relative z-10">
               {/* Header */}
-              <div className="text-center mb-8">
-                <h1 className="text-3xl font-serif font-semibold mb-3 tracking-wide" 
-                    style={{ 
-                      animation: 'breathing 4s ease-in-out infinite',
-                      color: '#6b7c93'
-                    }}>
-                  Gilded Grove
-                </h1>
-                <div className="w-16 h-px mx-auto mb-4" 
+              <div className="text-center mb-2">
+                <h1 className="shine-text">Gilded Grove</h1>
+                <div className="w-[30%] h-px mx-auto mt-0 mb-4" 
                      style={{ 
-                       animation: 'fadeInOut 3s ease-in-out infinite',
-                       backgroundColor: '#57606f',
-                       opacity: 0.6
+                       backgroundColor: '#d6b86b',
+                       opacity: 0.95
                      }}></div>
                 <p className="text-base-content/80 text-sm leading-relaxed">
                   Streamlined estate inventory for sophisticated families managing complex, multi-generational assets.
@@ -143,7 +136,7 @@ export default function Home() {
                       placeholder="Enter your first name"
                       required
                       disabled={isLoading}
-                      className="input input-bordered input-primary bg-base-300/50 border-base-300 focus:border-primary transition-all duration-500 hover:bg-base-300/70"
+                      className="input input-bordered input-primary bg-base-300/50 border-base-300 focus:border-primary transition-all duration-500 hover:bg-base-300/70 w-full mt-1"
                     />
                   </div>
 
@@ -158,7 +151,7 @@ export default function Home() {
                       placeholder="Enter your last name"
                       required
                       disabled={isLoading}
-                      className="input input-bordered input-primary bg-base-300/50 border-base-300 focus:border-primary transition-all duration-500 hover:bg-base-300/70"
+                      className="input input-bordered input-primary bg-base-300/50 border-base-300 focus:border-primary transition-all duration-500 hover:bg-base-300/70 w-full mt-1"
                     />
                   </div>
 
@@ -173,7 +166,7 @@ export default function Home() {
                       placeholder="your.email@example.com"
                       required
                       disabled={isLoading}
-                      className="input input-bordered input-primary bg-base-300/50 border-base-300 focus:border-primary transition-all duration-500 hover:bg-base-300/70"
+                      className="input input-bordered input-primary bg-base-300/50 border-base-300 focus:border-primary transition-all duration-500 hover:bg-base-300/70 w-full mt-1"
                     />
                   </div>
 
@@ -190,7 +183,7 @@ export default function Home() {
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="+1 (555) 123-4567"
                       disabled={isLoading}
-                      className="input input-bordered input-primary bg-base-300/50 border-base-300 focus:border-primary transition-all duration-500 hover:bg-base-300/70"
+                      className="input input-bordered input-primary bg-base-300/50 border-base-300 focus:border-primary transition-all duration-500 hover:bg-base-300/70 w-full mt-1"
                     />
                   </div>
                 </div>
@@ -224,7 +217,8 @@ export default function Home() {
               </form>
 
               {/* Trust indicators */}
-              <div className="mt-8 pt-6 border-t border-base-300/30">
+              <div className="w-[30%] h-px mx-auto mt-10 mb-0" style={{ backgroundColor: '#d6b86b', opacity: 0.95 }}></div>
+              <div className="mt-8 pt-6">
                 <div className="flex items-center justify-center space-x-8 text-xs text-base-content/60">
                   <div className="flex items-center space-x-2" 
                        style={{ animation: 'gentleGlow 6s ease-in-out infinite' }}>
