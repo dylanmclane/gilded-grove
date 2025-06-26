@@ -246,53 +246,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      {/* Custom CSS for sophisticated animations */}
-      <style jsx>{`
-        @keyframes gentleFloat {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-8px); }
-        }
-        
-        @keyframes breathing {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.9; }
-        }
-        
-        @keyframes fadeInOut {
-          0%, 100% { opacity: 0.6; }
-          50% { opacity: 1; }
-        }
-        
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.2; }
-          25% { transform: translateY(-10px) translateX(5px); opacity: 0.4; }
-          50% { transform: translateY(-5px) translateX(-3px); opacity: 0.3; }
-          75% { transform: translateY(-15px) translateX(2px); opacity: 0.5; }
-        }
-        
-        @keyframes gentleGlow {
-          0%, 100% { opacity: 0.6; }
-          50% { opacity: 1; }
-        }
-        
-        @keyframes gradientLoop {
-          0% { 
-            background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
-          }
-          50% { 
-            background-position: 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%;
-          }
-          100% { 
-            background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
-          }
-        }
-        
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(-10px); }
-          to { opacity: 1; transform: translateY(0px); }
-        }
-      `}</style>
     </main>
   );
 }
