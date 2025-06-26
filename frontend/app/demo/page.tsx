@@ -48,11 +48,6 @@ export default function DemoEstateMVP() {
   const [aiResponse, setAiResponse] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  function handleAddAsset() {
-    setShowForm(true);
-    setForm({});
-  }
-
   function handleSaveAsset(e: React.FormEvent) {
     e.preventDefault();
     if (form.name && form.type && form.value && form.location) {
@@ -109,7 +104,7 @@ export default function DemoEstateMVP() {
               <EstateIcon />
               <h1 className="text-4xl font-serif font-bold text-[#d6b86b] tracking-wider">The Greenwood Family Dashboard</h1>
             </div>
-            <p className="text-base-content/70 text-lg">A luxury-inspired MVP for managing your estate's assets.</p>
+            <p className="text-base-content/70 text-lg">A luxury-inspired MVP for managing your estate&apos;s assets.</p>
           </header>
           {/* Common Access Buttons */}
           <div className="flex justify-center gap-4 mb-8 flex-wrap">

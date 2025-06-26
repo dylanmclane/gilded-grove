@@ -8,7 +8,6 @@ let clientPromise: Promise<MongoClient>;
 
 if (process.env.NODE_ENV === 'development') {
   // In development, use a global variable so the value is preserved across module reloads
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const globalWithMongo = global as unknown as { _mongoClientPromise?: Promise<MongoClient> };
   if (!globalWithMongo._mongoClientPromise) {
     client = new MongoClient(uri);
