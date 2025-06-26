@@ -40,9 +40,15 @@ body {
 }
 
 @keyframes gradientLoop {
-  0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-  50% { background-position: 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%; }
-  100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+  0% {
+    background-position: 15% 25%, 75% 15%, 35% 75%, 55% 45%, 50% 50%;
+  }
+  50% {
+    background-position: 35% 45%, 55% 35%, 55% 55%, 45% 55%, 60% 60%;
+  }
+  100% {
+    background-position: 15% 25%, 75% 15%, 35% 75%, 55% 45%, 50% 50%;
+  }
 }
 
 @keyframes fadeIn {

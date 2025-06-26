@@ -53,7 +53,7 @@ export default function Home() {
       <div className="relative min-h-screen">
         <div className="absolute inset-0 z-0" 
              style={{ 
-               animation: 'gradientLoop 15s linear infinite',
+               animation: 'gradientLoop 30s linear infinite',
                background: `
                  radial-gradient(circle at 20% 50%, rgba(87,96,111,0.6) 0%, rgba(87,96,111,0.6) 30%, transparent 60%),
                  radial-gradient(circle at 80% 20%, #4a4a4a 0%, #4a4a4a 25%, transparent 55%),
@@ -232,7 +232,7 @@ export default function Home() {
                     <svg className="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span>Family-Owned</span>
+                    <span>Boutique & Discreet</span>
                   </div>
                 </div>
               </div>
