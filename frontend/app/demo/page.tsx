@@ -146,6 +146,11 @@ export default function DemoEstateMVP() {
         <div className="flex flex-col gap-2">
           {navLinks.map((nav) => {
             const { label, icon: Icon, href } = nav;
+            // Highlight Dashboard if on /demo or /demo/dashboard
+            const isDashboard = label === "Dashboard" && (pathname === "/demo" || pathname === "/demo/dashboard");
+            // Highlight Contacts only if on /demo and not on /demo/dashboard
+            const isContacts = label === "Contacts" && pathname === "/demo";
+            const isActive = isDashboard || isContacts || pathname === href;
             return (
               <Link
                 key={label}
@@ -153,8 +158,8 @@ export default function DemoEstateMVP() {
                 className={
                   `flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition w-full ${sidebarOpen ? "justify-start" : "justify-center"} ` +
                   (darkMode ?
-                    (pathname === href ? "bg-[#18191a] text-[#f7f8fa]" : "text-[#f7f8fa] hover:bg-[#23272f]") :
-                    (pathname === href ? "bg-[#e5e5ea] text-gray-900" : "text-gray-800 hover:bg-[#f2f2f7]")
+                    (isActive ? "bg-[#18191a] text-[#f7f8fa]" : "text-[#f7f8fa] hover:bg-[#23272f]") :
+                    (isActive ? "bg-[#e5e5ea] text-gray-900" : "text-gray-800 hover:bg-[#f2f2f7]")
                   )
                 }
                 style={{ fontSize: sidebarOpen ? '1.1rem' : '1.3rem', minHeight: 48 }}
