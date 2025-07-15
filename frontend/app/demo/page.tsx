@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 // Icon SVGs
 const EstateIcon = () => (
@@ -17,14 +19,6 @@ const HamburgerIcon = ({ open }: { open: boolean }) => (
     )}
   </svg>
 );
-const navItems = [
-  { label: "Dashboard", icon: EstateIcon },
-  { label: "Assets", icon: EstateIcon },
-  { label: "Documents", icon: EstateIcon },
-  { label: "Contacts", icon: EstateIcon },
-  { label: "Reports", icon: EstateIcon },
-  { label: "Settings", icon: EstateIcon },
-];
 
 type Asset = {
   id: number;
@@ -48,6 +42,16 @@ export default function DemoEstateMVP() {
   const [aiResponse, setAiResponse] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
+  const pathname = usePathname();
+
+  const navLinks = [
+    { label: "Dashboard", icon: EstateIcon, href: "/demo/dashboard" },
+    { label: "Assets", icon: EstateIcon, href: "/demo/assets" },
+    { label: "Documents", icon: EstateIcon, href: "/demo/documents" },
+    { label: "Contacts", icon: EstateIcon, href: "/demo" }, // Demo as Contacts placeholder
+    { label: "Reports", icon: EstateIcon, href: "/demo/reports" },
+    { label: "Settings", icon: EstateIcon, href: "/demo/settings" },
+  ] as const;
 
   // Optional: persist dark mode in localStorage
   useEffect(() => {
@@ -104,7 +108,7 @@ export default function DemoEstateMVP() {
             ) : (
               <span role="img" aria-label="sun">☀️</span>
             )}
-            <span className="hidden md:inline">{darkMode ? "Dark" : "Light"} Mode</span>
+            <span className="hidden md:inline">{darkMode ? "Light" : "Dark"} Mode</span>
           </button>
         </div>
         <button
@@ -115,16 +119,26 @@ export default function DemoEstateMVP() {
           <HamburgerIcon open={sidebarOpen} />
         </button>
         <div className="flex flex-col gap-2">
-          {navItems.map(({ label, icon: Icon }) => (
-            <button
-              key={label}
-              className={`flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition w-full ${sidebarOpen ? "justify-start" : "justify-center"} ` + (darkMode ? "text-[#f7f8fa] hover:bg-[#23272f]" : "text-gray-800 hover:bg-[#f2f2f7]")}
-              style={{ fontSize: sidebarOpen ? '1.1rem' : '1.3rem', minHeight: 48 }}
-            >
-              <Icon />
-              {sidebarOpen && <span>{label}</span>}
-            </button>
-          ))}
+          {navLinks.map((nav) => {
+            const { label, icon: Icon, href } = nav;
+            return (
+              <Link
+                key={label}
+                href={href}
+                className={
+                  `flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition w-full ${sidebarOpen ? "justify-start" : "justify-center"} ` +
+                  (darkMode ?
+                    (pathname === href ? "bg-[#18191a] text-[#f7f8fa]" : "text-[#f7f8fa] hover:bg-[#23272f]") :
+                    (pathname === href ? "bg-[#e5e5ea] text-gray-900" : "text-gray-800 hover:bg-[#f2f2f7]")
+                  )
+                }
+                style={{ fontSize: sidebarOpen ? '1.1rem' : '1.3rem', minHeight: 48 }}
+              >
+                <Icon />
+                {sidebarOpen && <span>{label}</span>}
+              </Link>
+            );
+          })}
         </div>
       </nav>
       {/* Main Dashboard Content */}
