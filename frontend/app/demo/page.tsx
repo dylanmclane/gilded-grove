@@ -5,9 +5,34 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 // Icon SVGs
-const EstateIcon = () => (
-  <svg className="w-8 h-8 text-[#d6b86b] mr-2" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l9-7 9 7M4 10v10a1 1 0 001 1h3m10-11v11a1 1 0 001 1h3m-10 0h4" />
+const DashboardIcon = () => (
+  <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7m-9 2v8m4-8v8m-4 0h4" />
+  </svg>
+);
+const AssetsIcon = () => (
+  <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7M16 3v4M8 3v4m-5 4h18" />
+  </svg>
+);
+const DocumentsIcon = () => (
+  <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M7 7v10a2 2 0 002 2h6a2 2 0 002-2V7m-2 0V5a2 2 0 00-2-2h-2a2 2 0 00-2 2v2m0 0h6" />
+  </svg>
+);
+const ContactsIcon = () => (
+  <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M12 12a4 4 0 100-8 4 4 0 000 8z" />
+  </svg>
+);
+const ReportsIcon = () => (
+  <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9 17v-6a2 2 0 012-2h2a2 2 0 012 2v6m-6 0h6" />
+  </svg>
+);
+const SettingsIcon = () => (
+  <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M12 15.5a3.5 3.5 0 100-7 3.5 3.5 0 000 7zM19.4 15a1.65 1.65 0 01.33 1.82l-1.1 1.9a1.65 1.65 0 01-2.1.7l-2.1-.84a1.65 1.65 0 00-1.28 0l-2.1.84a1.65 1.65 0 01-2.1-.7l-1.1-1.9a1.65 1.65 0 01.33-1.82l1.65-1.36a1.65 1.65 0 00.5-1.5l-.31-2.21a1.65 1.65 0 011.16-1.82l2.12-.36a1.65 1.65 0 011.16 0l2.12.36a1.65 1.65 0 011.16 1.82l-.31 2.21a1.65 1.65 0 00.5 1.5l1.65 1.36z" />
   </svg>
 );
 const HamburgerIcon = ({ open }: { open: boolean }) => (
@@ -45,12 +70,12 @@ export default function DemoEstateMVP() {
   const pathname = usePathname();
 
   const navLinks = [
-    { label: "Dashboard", icon: EstateIcon, href: "/demo/dashboard" },
-    { label: "Assets", icon: EstateIcon, href: "/demo/assets" },
-    { label: "Documents", icon: EstateIcon, href: "/demo/documents" },
-    { label: "Contacts", icon: EstateIcon, href: "/demo" }, // Demo as Contacts placeholder
-    { label: "Reports", icon: EstateIcon, href: "/demo/reports" },
-    { label: "Settings", icon: EstateIcon, href: "/demo/settings" },
+    { label: "Dashboard", icon: DashboardIcon, href: "/demo/dashboard" },
+    { label: "Assets", icon: AssetsIcon, href: "/demo/assets" },
+    { label: "Documents", icon: DocumentsIcon, href: "/demo/documents" },
+    { label: "Contacts", icon: ContactsIcon, href: "/demo" },
+    { label: "Reports", icon: ReportsIcon, href: "/demo/reports" },
+    { label: "Settings", icon: SettingsIcon, href: "/demo/settings" },
   ] as const;
 
   // Optional: persist dark mode in localStorage
@@ -147,7 +172,7 @@ export default function DemoEstateMVP() {
           {/* Dashboard Header */}
           <header className="mb-8 text-center flex flex-col items-center">
             <div className="flex items-center justify-center mb-2">
-              <EstateIcon />
+              <DashboardIcon />
               <h1 className={`text-3xl font-serif font-bold tracking-tight ` + (darkMode ? "text-[#f7f8fa]" : "text-gray-900")}>The Greenwood Family Dashboard</h1>
             </div>
             <p className={darkMode ? "text-gray-400 text-lg" : "text-gray-500 text-lg"}>A clean, modern dashboard for managing your estate&apos;s assets.</p>
