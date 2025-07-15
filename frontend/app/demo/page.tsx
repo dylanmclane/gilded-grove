@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Icon SVGs
 const EstateIcon = () => (
@@ -47,6 +47,16 @@ export default function DemoEstateMVP() {
   const [aiQuery, setAiQuery] = useState<string | null>(null);
   const [aiResponse, setAiResponse] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+
+  // Optional: persist dark mode in localStorage
+  useEffect(() => {
+    const stored = localStorage.getItem("gg_dark_mode");
+    if (stored) setDarkMode(stored === "true");
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("gg_dark_mode", darkMode ? "true" : "false");
+  }, [darkMode]);
 
   function handleSaveAsset(e: React.FormEvent) {
     e.preventDefault();
@@ -70,14 +80,35 @@ export default function DemoEstateMVP() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#232a23] via-[#2e332e] to-[#b7e4c7] flex">
+    <main className={
+      `min-h-screen flex ` +
+      (darkMode ? "bg-[#18191a]" : "bg-[#f4f5f7]")
+    }>
       {/* Sidebar */}
       <nav
-        className={`transition-all duration-300 bg-base-200/90 border-r border-base-300/60 shadow-xl flex flex-col py-8 px-3
-          ${sidebarOpen ? "w-56" : "w-16"} min-h-screen z-30`}
+        className={
+          `transition-all duration-300 shadow-lg flex flex-col py-8 px-3 ${sidebarOpen ? "w-60" : "w-16"} min-h-screen z-30 rounded-r-3xl border-r ` +
+          (darkMode ? "bg-[#23272f] border-[#23272f]" : "bg-white border-[#ececec]")
+        }
+        style={{ boxShadow: '0 4px 24px 0 rgba(0,0,0,0.07)' }}
       >
+        {/* Dark mode toggle */}
+        <div className="flex items-center justify-center mb-8">
+          <button
+            className={`flex items-center gap-2 px-3 py-2 rounded-full transition font-medium text-sm shadow-sm border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec]'} hover:brightness-110`}
+            onClick={() => setDarkMode(dm => !dm)}
+            aria-label="Toggle dark mode"
+          >
+            {darkMode ? (
+              <span role="img" aria-label="moon">🌙</span>
+            ) : (
+              <span role="img" aria-label="sun">☀️</span>
+            )}
+            <span className="hidden md:inline">{darkMode ? "Dark" : "Light"} Mode</span>
+          </button>
+        </div>
         <button
-          className="mb-8 flex items-center justify-center rounded-full hover:bg-[#d6b86b]/10 transition p-2"
+          className="mb-8 flex items-center justify-center rounded-full hover:bg-[#f2f2f7] transition p-2"
           onClick={() => setSidebarOpen((o) => !o)}
           aria-label={sidebarOpen ? "Collapse menu" : "Expand menu"}
         >
@@ -87,7 +118,8 @@ export default function DemoEstateMVP() {
           {navItems.map(({ label, icon: Icon }) => (
             <button
               key={label}
-              className={`flex items-center gap-3 px-3 py-2 rounded-lg font-medium text-base-content/90 hover:bg-[#d6b86b]/10 transition w-full ${sidebarOpen ? "justify-start" : "justify-center"}`}
+              className={`flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition w-full ${sidebarOpen ? "justify-start" : "justify-center"} ` + (darkMode ? "text-[#f7f8fa] hover:bg-[#23272f]" : "text-gray-800 hover:bg-[#f2f2f7]")}
+              style={{ fontSize: sidebarOpen ? '1.1rem' : '1.3rem', minHeight: 48 }}
             >
               <Icon />
               {sidebarOpen && <span>{label}</span>}
@@ -96,29 +128,29 @@ export default function DemoEstateMVP() {
         </div>
       </nav>
       {/* Main Dashboard Content */}
-      <div className="flex-1 flex flex-col items-center py-12 px-4">
-        <div className="w-full max-w-2xl bg-base-200/80 rounded-2xl shadow-2xl p-8 border border-base-300/60 flex flex-col min-h-[80vh]">
+      <div className={`flex-1 flex flex-col items-center py-12 px-4 ` + (darkMode ? "bg-[#18191a]" : "bg-[#f4f5f7]")}>
+        <div className={`w-full max-w-2xl rounded-3xl shadow-xl p-8 border flex flex-col min-h-[80vh] ` + (darkMode ? "bg-[#23272f] border-[#35373b]" : "bg-[#fcfcfd] border-[#ececec]")} style={{ boxShadow: '0 8px 32px 0 rgba(0,0,0,0.08)' }}>
           {/* Dashboard Header */}
           <header className="mb-8 text-center flex flex-col items-center">
             <div className="flex items-center justify-center mb-2">
               <EstateIcon />
-              <h1 className="text-4xl font-serif font-bold text-[#d6b86b] tracking-wider">The Greenwood Family Dashboard</h1>
+              <h1 className={`text-3xl font-serif font-bold tracking-tight ` + (darkMode ? "text-[#f7f8fa]" : "text-gray-900")}>The Greenwood Family Dashboard</h1>
             </div>
-            <p className="text-base-content/70 text-lg">A luxury-inspired MVP for managing your estate&apos;s assets.</p>
+            <p className={darkMode ? "text-gray-400 text-lg" : "text-gray-500 text-lg"}>A clean, modern dashboard for managing your estate&apos;s assets.</p>
           </header>
           {/* Common Access Buttons */}
           <div className="flex justify-center gap-4 mb-8 flex-wrap">
-            <button className="btn btn-outline border-[#d6b86b] text-[#d6b86b] hover:bg-[#d6b86b]/10">Assets</button>
-            <button className="btn btn-outline border-[#d6b86b] text-[#d6b86b] hover:bg-[#d6b86b]/10">Documents</button>
-            <button className="btn btn-outline border-[#d6b86b] text-[#d6b86b] hover:bg-[#d6b86b]/10">Contacts</button>
-            <button className="btn btn-outline border-[#d6b86b] text-[#d6b86b] hover:bg-[#d6b86b]/10">Reports</button>
+            <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Assets</button>
+            <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Documents</button>
+            <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Contacts</button>
+            <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Reports</button>
           </div>
           {/* Asset Table */}
-          <div className="overflow-x-auto rounded-xl shadow mb-8">
+          <div className={`overflow-x-auto rounded-2xl shadow-sm mb-8 border ${darkMode ? 'border-[#35373b] bg-[#23272f]' : 'border-[#ececec] bg-[#fafafd]'}`}>
             <table className="table w-full">
               <thead>
-                <tr className="bg-base-300/60">
-                  <th>Name</th>
+                <tr className={darkMode ? "bg-[#23272f] text-gray-300" : "bg-[#f2f2f7] text-gray-700"}>
+                  <th className="py-3">Name</th>
                   <th>Type</th>
                   <th>Value</th>
                   <th>Location</th>
@@ -126,50 +158,54 @@ export default function DemoEstateMVP() {
               </thead>
               <tbody>
                 {assets.map(asset => (
-                  <tr key={asset.id}>
-                    <td className="font-medium">{asset.name}</td>
-                    <td>{asset.type}</td>
-                    <td>{asset.value}</td>
-                    <td>{asset.location}</td>
+                  <tr key={asset.id} className={darkMode ? "hover:bg-[#18191a] transition" : "hover:bg-[#f2f2f7] transition"}>
+                    <td className={`font-medium py-2 ${darkMode ? 'text-[#f7f8fa]' : 'text-gray-900'}`}>{asset.name}</td>
+                    <td className={darkMode ? 'text-gray-300' : 'text-gray-700'}>{asset.type}</td>
+                    <td className={darkMode ? 'text-gray-300' : 'text-gray-700'}>{asset.value}</td>
+                    <td className={darkMode ? 'text-gray-300' : 'text-gray-700'}>{asset.location}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
           {showForm && (
-            <form onSubmit={handleSaveAsset} className="bg-base-100/90 rounded-xl shadow-lg p-6 max-w-md mx-auto mb-8 border border-base-300/40">
-              <h3 className="text-lg font-semibold mb-4 text-[#d6b86b]">Add New Asset</h3>
+            <form onSubmit={handleSaveAsset} className={`rounded-2xl shadow p-6 max-w-md mx-auto mb-8 border ${darkMode ? 'bg-[#18191a] border-[#35373b]' : 'bg-[#f7f8fa] border-[#ececec]'}`}>
+              <h3 className={`text-lg font-semibold mb-4 ${darkMode ? 'text-[#f7f8fa]' : 'text-gray-900'}`}>Add New Asset</h3>
               <input
-                className="input input-bordered w-full mb-3"
+                className={`input input-bordered w-full mb-3 rounded-xl border bg-white focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] text-gray-900'}`}
                 placeholder="Name"
                 value={form.name || ""}
                 onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                 required
+                style={{ minHeight: 44, fontSize: 16 }}
               />
               <input
-                className="input input-bordered w-full mb-3"
+                className={`input input-bordered w-full mb-3 rounded-xl border bg-white focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] text-gray-900'}`}
                 placeholder="Type"
                 value={form.type || ""}
                 onChange={e => setForm(f => ({ ...f, type: e.target.value }))}
                 required
+                style={{ minHeight: 44, fontSize: 16 }}
               />
               <input
-                className="input input-bordered w-full mb-3"
+                className={`input input-bordered w-full mb-3 rounded-xl border bg-white focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] text-gray-900'}`}
                 placeholder="Value"
                 value={form.value || ""}
                 onChange={e => setForm(f => ({ ...f, value: e.target.value }))}
                 required
+                style={{ minHeight: 44, fontSize: 16 }}
               />
               <input
-                className="input input-bordered w-full mb-3"
+                className={`input input-bordered w-full mb-3 rounded-xl border bg-white focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] text-gray-900'}`}
                 placeholder="Location"
                 value={form.location || ""}
                 onChange={e => setForm(f => ({ ...f, location: e.target.value }))}
                 required
+                style={{ minHeight: 44, fontSize: 16 }}
               />
-              <div className="flex gap-2">
-                <button type="submit" className="btn btn-primary">Save</button>
-                <button type="button" className="btn" onClick={() => setShowForm(false)}>Cancel</button>
+              <div className="flex gap-2 mt-2">
+                <button type="submit" className={`rounded-xl px-5 py-2 font-semibold shadow transition w-full ${darkMode ? 'bg-[#007aff] text-white hover:bg-[#005ecb]' : 'bg-[#007aff] text-white hover:bg-[#005ecb]'}`} style={{ minHeight: 44, fontSize: 16 }}>Save</button>
+                <button type="button" className={`rounded-xl px-5 py-2 font-semibold shadow transition w-full ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border border-[#ececec] hover:bg-[#e5e5ea]'}`} style={{ minHeight: 44, fontSize: 16 }} onClick={() => setShowForm(false)}>Cancel</button>
               </div>
             </form>
           )}
@@ -177,20 +213,19 @@ export default function DemoEstateMVP() {
           <div className="mt-auto flex flex-col items-center pt-8">
             <form onSubmit={handleAISubmit} className="w-full max-w-md flex gap-2">
               <input
-                className="input input-bordered flex-1 text-lg px-4 py-3 rounded-full bg-base-100/90 border-[#d6b86b] focus:border-[#228B22] focus:ring-2 focus:ring-[#228B22] placeholder:text-base-content/60"
+                className={`input input-bordered flex-1 text-lg px-4 py-3 rounded-xl border focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] bg-white text-gray-900'}`}
                 placeholder="How can I help?"
                 value={aiInput}
                 onChange={e => setAiInput(e.target.value)}
                 required
+                style={{ minHeight: 44, fontSize: 16 }}
               />
-              <button type="submit" className="btn btn-accent rounded-full px-6 text-lg font-semibold bg-gradient-to-r from-[#d6b86b] via-[#b7e4c7] to-[#228B22] border-none text-[#232a23] hover:brightness-110 shadow-xl">
-                Ask
-              </button>
+              <button type="submit" className={`rounded-xl px-6 text-lg font-semibold shadow transition ${darkMode ? 'bg-[#007aff] text-white hover:bg-[#005ecb]' : 'bg-[#007aff] text-white hover:bg-[#005ecb]'}`} style={{ minHeight: 44 }}>Ask</button>
             </form>
             {aiQuery && (
-              <div className="mt-6 w-full max-w-md bg-base-100/80 rounded-xl shadow p-4 border border-base-300/30">
-                <div className="text-base-content/70 mb-2"><span className="font-semibold text-base-content">You:</span> {aiQuery}</div>
-                <div className="text-base-content/80"><span className="font-semibold text-[#d6b86b]">AI:</span> {aiResponse}</div>
+              <div className={`mt-6 w-full max-w-md rounded-2xl shadow p-4 border ${darkMode ? 'bg-[#18191a] border-[#35373b]' : 'bg-[#f7f8fa] border-[#ececec]'}`}>
+                <div className={`mb-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}><span className={`font-semibold ${darkMode ? 'text-[#f7f8fa]' : 'text-gray-700'}`}>You:</span> {aiQuery}</div>
+                <div className={darkMode ? 'text-[#f7f8fa]' : 'text-gray-700'}><span className="font-semibold text-[#007aff]">AI:</span> {aiResponse}</div>
               </div>
             )}
           </div>
