@@ -77,7 +77,7 @@ export default function Signup() {
           {submitted ? (
             <div className="text-center py-10 relative z-10">
               <h2 className="text-2xl font-semibold mb-2" style={{ color: '#d4af37', fontFamily: 'serif' }}>Thank you for your interest!</h2>
-              <p className="text-gray-300">We'll be in touch if your application is selected.</p>
+              <p className="text-gray-300">We will be in touch if your application is selected.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col space-y-6 relative z-10">
