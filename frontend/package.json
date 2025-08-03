@@ -16,6 +16,9 @@
     "react-dom": "^19.0.0",
     "resend": "^4.6.0"
   },
+  "engines": {
+    "node": "22.x"
+  },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
