@@ -130,3 +130,24 @@ body {
   color: #fffbe6;
   box-shadow: 0 2px 16px 0 rgba(34,139,34,0.18);
 }
+
+/* Apple-style soft shadow utilities */
+.shadow-xl {
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.08) !important;
+}
+.shadow-lg {
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.07) !important;
+}
+.shadow-sm {
+  box-shadow: 0 1.5px 6px 0 rgba(0,0,0,0.04) !important;
+}
+
+/* Apple-style large rounded corners */
+.rounded-3xl {
+  border-radius: 2rem !important;
+}
+
+/* Apple-style light background */
+.bg-ios-light {
+  background-color: #f8f8fa !important;
+}
