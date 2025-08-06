@@ -66,7 +66,7 @@ export default function Signup() {
   };
 
   return (
-    <main className="min-h-screen w-full flex items-center justify-center px-4" style={{ background: 'linear-gradient(135deg, #181b2c 0%, #23243a 100%)' }}>
+    <div className="min-h-screen w-full flex items-center justify-center px-4 pt-16 lg:pt-0" style={{ background: 'linear-gradient(135deg, #181b2c 0%, #23243a 100%)' }}>
       <div className="w-full max-w-sm flex flex-col items-center justify-center flex-grow">
         <CrestIcon />
         <h1 className="text-3xl md:text-4xl font-extrabold text-center mb-8 tracking-tight whitespace-nowrap" style={{ fontFamily: 'serif', color: '#d4af37', letterSpacing: '-0.01em' }}>
@@ -146,6 +146,6 @@ export default function Signup() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 } 

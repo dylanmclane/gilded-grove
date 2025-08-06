@@ -2,47 +2,13 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { 
+  LayoutDashboard
+} from 'lucide-react';
 
-// Icon SVGs
+// Icon components with consistent styling
 const DashboardIcon = () => (
-  <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7m-9 2v8m4-8v8m-4 0h4" />
-  </svg>
-);
-const AssetsIcon = () => (
-  <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7M16 3v4M8 3v4m-5 4h18" />
-  </svg>
-);
-const DocumentsIcon = () => (
-  <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M7 7v10a2 2 0 002 2h6a2 2 0 002-2V7m-2 0V5a2 2 0 00-2-2h-2a2 2 0 00-2 2v2m0 0h6" />
-  </svg>
-);
-const ContactsIcon = () => (
-  <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M12 12a4 4 0 100-8 4 4 0 000 8z" />
-  </svg>
-);
-const ReportsIcon = () => (
-  <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M9 17v-6a2 2 0 012-2h2a2 2 0 012 2v6m-6 0h6" />
-  </svg>
-);
-const SettingsIcon = () => (
-  <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M12 15.5a3.5 3.5 0 100-7 3.5 3.5 0 000 7zM19.4 15a1.65 1.65 0 01.33 1.82l-1.1 1.9a1.65 1.65 0 01-2.1.7l-2.1-.84a1.65 1.65 0 00-1.28 0l-2.1.84a1.65 1.65 0 01-2.1-.7l-1.1-1.9a1.65 1.65 0 01.33-1.82l1.65-1.36a1.65 1.65 0 00.5-1.5l-.31-2.21a1.65 1.65 0 011.16-1.82l2.12-.36a1.65 1.65 0 011.16 0l2.12.36a1.65 1.65 0 011.16 1.82l-.31 2.21a1.65 1.65 0 00.5 1.5l1.65 1.36z" />
-  </svg>
-);
-const HamburgerIcon = ({ open }: { open: boolean }) => (
-  <svg className="w-7 h-7 text-[#d6b86b]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-    {open ? (
-      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-    ) : (
-      <path strokeLinecap="round" strokeLinejoin="round" d="M4 8h16M4 16h16" />
-    )}
-  </svg>
+  <LayoutDashboard className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.5]" />
 );
 
 type Asset = {
@@ -63,20 +29,8 @@ export default function DemoEstateMVP() {
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState<Partial<Asset>>({});
   const [aiInput, setAiInput] = useState("");
-  const [aiQuery, setAiQuery] = useState<string | null>(null);
   const [aiResponse, setAiResponse] = useState<string | null>(null);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
-  const pathname = usePathname();
-
-  const navLinks = [
-    { label: "Dashboard", icon: DashboardIcon, href: "/demo/dashboard" },
-    { label: "Assets", icon: AssetsIcon, href: "/demo/assets" },
-    { label: "Documents", icon: DocumentsIcon, href: "/demo/documents" },
-    { label: "Contacts", icon: ContactsIcon, href: "/demo" },
-    { label: "Reports", icon: ReportsIcon, href: "/demo/reports" },
-    { label: "Settings", icon: SettingsIcon, href: "/demo/settings" },
-  ] as const;
 
   // Optional: persist dark mode in localStorage
   useEffect(() => {
@@ -101,7 +55,6 @@ export default function DemoEstateMVP() {
 
   function handleAISubmit(e: React.FormEvent) {
     e.preventDefault();
-    setAiQuery(aiInput);
     setAiResponse(
       `I'm your estate assistant. (This is a demo response for: "${aiInput}")`
     );
@@ -109,85 +62,48 @@ export default function DemoEstateMVP() {
   }
 
   return (
-    <main className={
-      `min-h-screen flex ` +
-      (darkMode ? "bg-[#18191a]" : "bg-[#f4f5f7]")
-    }>
-      {/* Sidebar */}
-      <nav
-        className={
-          `transition-all duration-300 shadow-lg flex flex-col py-8 px-3 ${sidebarOpen ? "w-60" : "w-16"} min-h-screen z-30 rounded-r-3xl border-r ` +
-          (darkMode ? "bg-[#23272f] border-[#23272f]" : "bg-white border-[#ececec]")
-        }
-        style={{ boxShadow: '0 4px 24px 0 rgba(0,0,0,0.07)' }}
-      >
-        {/* Dark mode toggle */}
-        <div className="flex items-center justify-center mb-8">
-          <button
-            className={`flex items-center gap-2 px-3 py-2 rounded-full transition font-medium text-sm shadow-sm border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec]'} hover:brightness-110`}
-            onClick={() => setDarkMode(dm => !dm)}
-            aria-label="Toggle dark mode"
-          >
-            {darkMode ? (
-              <span role="img" aria-label="moon">🌙</span>
-            ) : (
-              <span role="img" aria-label="sun">☀️</span>
-            )}
-            <span className="hidden md:inline">{darkMode ? "Light" : "Dark"} Mode</span>
-          </button>
-        </div>
+    <div className={`min-h-screen ${darkMode ? "bg-[#18191a]" : "bg-[#f4f5f7]"}`}>
+      {/* Dark mode toggle */}
+      <div className="flex justify-end p-4">
         <button
-          className="mb-8 flex items-center justify-center rounded-full hover:bg-[#f2f2f7] transition p-2"
-          onClick={() => setSidebarOpen((o) => !o)}
-          aria-label={sidebarOpen ? "Collapse menu" : "Expand menu"}
+          className={`flex items-center gap-2 px-3 py-2 rounded-full transition font-medium text-sm shadow-sm border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec]'} hover:brightness-110`}
+          onClick={() => setDarkMode(dm => !dm)}
+          aria-label="Toggle dark mode"
         >
-          <HamburgerIcon open={sidebarOpen} />
+          {darkMode ? (
+            <span role="img" aria-label="moon">🌙</span>
+          ) : (
+            <span role="img" aria-label="sun">☀️</span>
+          )}
+          <span className="hidden md:inline">{darkMode ? "Light" : "Dark"} Mode</span>
         </button>
-        <div className="flex flex-col gap-2">
-          {navLinks.map((nav) => {
-            const { label, icon: Icon, href } = nav;
-            // Highlight Dashboard if on /demo or /demo/dashboard
-            const isDashboard = label === "Dashboard" && (pathname === "/demo" || pathname === "/demo/dashboard");
-            // Highlight Contacts only if on /demo and not on /demo/dashboard
-            const isContacts = label === "Contacts" && pathname === "/demo";
-            const isActive = isDashboard || isContacts || pathname === href;
-            return (
-              <Link
-                key={label}
-                href={href}
-                className={
-                  `flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition w-full ${sidebarOpen ? "justify-start" : "justify-center"} ` +
-                  (darkMode ?
-                    (isActive ? "bg-[#18191a] text-[#f7f8fa]" : "text-[#f7f8fa] hover:bg-[#23272f]") :
-                    (isActive ? "bg-[#e5e5ea] text-gray-900" : "text-gray-800 hover:bg-[#f2f2f7]")
-                  )
-                }
-                style={{ fontSize: sidebarOpen ? '1.1rem' : '1.3rem', minHeight: 48 }}
-              >
-                <Icon />
-                {sidebarOpen && <span>{label}</span>}
-              </Link>
-            );
-          })}
-        </div>
-      </nav>
+      </div>
+
       {/* Main Dashboard Content */}
-      <div className={`flex-1 flex flex-col items-center py-12 px-4 ` + (darkMode ? "bg-[#18191a]" : "bg-[#f4f5f7]")}>
-        <div className={`w-full max-w-2xl rounded-3xl shadow-xl p-8 border flex flex-col min-h-[80vh] ` + (darkMode ? "bg-[#23272f] border-[#35373b]" : "bg-[#fcfcfd] border-[#ececec]")} style={{ boxShadow: '0 8px 32px 0 rgba(0,0,0,0.08)' }}>
+      <div className={`flex flex-col items-center py-12 px-4 ${darkMode ? "bg-[#18191a]" : "bg-[#f4f5f7]"}`}>
+        <div className={`w-full max-w-2xl rounded-3xl shadow-xl p-8 border flex flex-col min-h-[80vh] ${darkMode ? "bg-[#23272f] border-[#35373b]" : "bg-[#fcfcfd] border-[#ececec]"}`} style={{ boxShadow: '0 8px 32px 0 rgba(0,0,0,0.08)' }}>
           {/* Dashboard Header */}
           <header className="mb-8 text-center flex flex-col items-center">
             <div className="flex items-center justify-center mb-2">
               <DashboardIcon />
-              <h1 className={`text-3xl font-serif font-bold tracking-tight ` + (darkMode ? "text-[#f7f8fa]" : "text-gray-900")}>The Greenwood Family Dashboard</h1>
+              <h1 className={`text-3xl font-serif font-bold tracking-tight ${darkMode ? "text-[#f7f8fa]" : "text-gray-900"}`}>The Greenwood Family Dashboard</h1>
             </div>
             <p className={darkMode ? "text-gray-400 text-lg" : "text-gray-500 text-lg"}>A clean, modern dashboard for managing your estate&apos;s assets.</p>
           </header>
           {/* Common Access Buttons */}
           <div className="flex justify-center gap-4 mb-8 flex-wrap">
-            <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Assets</button>
-            <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Documents</button>
-            <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Contacts</button>
-            <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Reports</button>
+            <Link href="/demo/assets">
+              <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Assets</button>
+            </Link>
+            <Link href="/demo/documents">
+              <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Documents</button>
+            </Link>
+            <Link href="/demo/contacts">
+              <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Contacts</button>
+            </Link>
+            <Link href="/demo/reports">
+              <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Reports</button>
+            </Link>
           </div>
           {/* Asset Table */}
           <div className={`overflow-x-auto rounded-2xl shadow-sm mb-8 border ${darkMode ? 'border-[#35373b] bg-[#23272f]' : 'border-[#ececec] bg-[#fafafd]'}`}>
@@ -216,7 +132,7 @@ export default function DemoEstateMVP() {
             <form onSubmit={handleSaveAsset} className={`rounded-2xl shadow p-6 max-w-md mx-auto mb-8 border ${darkMode ? 'bg-[#18191a] border-[#35373b]' : 'bg-[#f7f8fa] border-[#ececec]'}`}>
               <h3 className={`text-lg font-semibold mb-4 ${darkMode ? 'text-[#f7f8fa]' : 'text-gray-900'}`}>Add New Asset</h3>
               <input
-                className={`input input-bordered w-full mb-3 rounded-xl border bg-white focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] text-gray-900'}`}
+                className={`input input-bordered w-full mb-3 rounded-xl border focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] bg-white text-gray-900 placeholder:text-gray-500'}`}
                 placeholder="Name"
                 value={form.name || ""}
                 onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
@@ -224,7 +140,7 @@ export default function DemoEstateMVP() {
                 style={{ minHeight: 44, fontSize: 16 }}
               />
               <input
-                className={`input input-bordered w-full mb-3 rounded-xl border bg-white focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] text-gray-900'}`}
+                className={`input input-bordered w-full mb-3 rounded-xl border focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] bg-white text-gray-900 placeholder:text-gray-500'}`}
                 placeholder="Type"
                 value={form.type || ""}
                 onChange={e => setForm(f => ({ ...f, type: e.target.value }))}
@@ -232,7 +148,7 @@ export default function DemoEstateMVP() {
                 style={{ minHeight: 44, fontSize: 16 }}
               />
               <input
-                className={`input input-bordered w-full mb-3 rounded-xl border bg-white focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] text-gray-900'}`}
+                className={`input input-bordered w-full mb-3 rounded-xl border focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] bg-white text-gray-900 placeholder:text-gray-500'}`}
                 placeholder="Value"
                 value={form.value || ""}
                 onChange={e => setForm(f => ({ ...f, value: e.target.value }))}
@@ -240,7 +156,7 @@ export default function DemoEstateMVP() {
                 style={{ minHeight: 44, fontSize: 16 }}
               />
               <input
-                className={`input input-bordered w-full mb-3 rounded-xl border bg-white focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] text-gray-900'}`}
+                className={`input input-bordered w-full mb-3 rounded-xl border focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] bg-white text-gray-900 placeholder:text-gray-500'}`}
                 placeholder="Location"
                 value={form.location || ""}
                 onChange={e => setForm(f => ({ ...f, location: e.target.value }))}
@@ -249,32 +165,40 @@ export default function DemoEstateMVP() {
               />
               <div className="flex gap-2 mt-2">
                 <button type="submit" className={`rounded-xl px-5 py-2 font-semibold shadow transition w-full ${darkMode ? 'bg-[#007aff] text-white hover:bg-[#005ecb]' : 'bg-[#007aff] text-white hover:bg-[#005ecb]'}`} style={{ minHeight: 44, fontSize: 16 }}>Save</button>
-                <button type="button" className={`rounded-xl px-5 py-2 font-semibold shadow transition w-full ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border border-[#ececec] hover:bg-[#e5e5ea]'}`} style={{ minHeight: 44, fontSize: 16 }} onClick={() => setShowForm(false)}>Cancel</button>
+                <button type="button" onClick={() => setShowForm(false)} className={`rounded-xl px-5 py-2 font-semibold shadow transition w-full ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border border-[#ececec] hover:bg-[#e5e5ea]'}`} style={{ minHeight: 44, fontSize: 16 }}>Cancel</button>
               </div>
             </form>
           )}
-          {/* AI Input Section */}
-          <div className="mt-auto flex flex-col items-center pt-8">
-            <form onSubmit={handleAISubmit} className="w-full max-w-md flex gap-2">
+          {!showForm && (
+            <div className="flex justify-center">
+              <button onClick={() => setShowForm(true)} className={`rounded-xl px-6 py-3 font-semibold shadow transition ${darkMode ? 'bg-[#007aff] text-white hover:bg-[#005ecb]' : 'bg-[#007aff] text-white hover:bg-[#005ecb]'}`} style={{ minHeight: 44, fontSize: 16 }}>
+                + Add Asset
+              </button>
+            </div>
+          )}
+          {/* AI Assistant */}
+          <div className={`mt-8 rounded-2xl shadow-sm border p-6 ${darkMode ? 'border-[#35373b] bg-[#23272f]' : 'border-[#ececec] bg-[#fafafd]'}`}>
+            <h3 className={`text-lg font-semibold mb-4 ${darkMode ? 'text-[#f7f8fa]' : 'text-gray-900'}`}>AI Assistant</h3>
+            <form onSubmit={handleAISubmit} className="flex gap-2">
               <input
-                className={`input input-bordered flex-1 text-lg px-4 py-3 rounded-xl border focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] bg-white text-gray-900'}`}
-                placeholder="How can I help?"
+                className={`flex-1 rounded-xl border px-4 py-2 focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] bg-white text-gray-900 placeholder:text-gray-500'}`}
+                placeholder="Ask about your assets..."
                 value={aiInput}
                 onChange={e => setAiInput(e.target.value)}
-                required
                 style={{ minHeight: 44, fontSize: 16 }}
               />
-              <button type="submit" className={`rounded-xl px-6 text-lg font-semibold shadow transition ${darkMode ? 'bg-[#007aff] text-white hover:bg-[#005ecb]' : 'bg-[#007aff] text-white hover:bg-[#005ecb]'}`} style={{ minHeight: 44 }}>Ask</button>
+              <button type="submit" className={`rounded-xl px-6 py-2 font-semibold shadow transition ${darkMode ? 'bg-[#007aff] text-white hover:bg-[#005ecb]' : 'bg-[#007aff] text-white hover:bg-[#005ecb]'}`} style={{ minHeight: 44, fontSize: 16 }}>
+                Ask
+              </button>
             </form>
-            {aiQuery && (
-              <div className={`mt-6 w-full max-w-md rounded-2xl shadow p-4 border ${darkMode ? 'bg-[#18191a] border-[#35373b]' : 'bg-[#f7f8fa] border-[#ececec]'}`}>
-                <div className={`mb-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}><span className={`font-semibold ${darkMode ? 'text-[#f7f8fa]' : 'text-gray-700'}`}>You:</span> {aiQuery}</div>
-                <div className={darkMode ? 'text-[#f7f8fa]' : 'text-gray-700'}><span className="font-semibold text-[#007aff]">AI:</span> {aiResponse}</div>
+            {aiResponse && (
+              <div className={`mt-4 p-4 rounded-xl ${darkMode ? 'bg-[#18191a] border border-[#35373b]' : 'bg-white border border-[#ececec]'}`}>
+                <p className={darkMode ? 'text-gray-300' : 'text-gray-700'}>{aiResponse}</p>
               </div>
             )}
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 } 

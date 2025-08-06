@@ -15,7 +15,7 @@ const DemoEstateMVP = dynamic(() => import('./demo/page').then(mod => mod.defaul
 
 export default function Landing() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-4 bg-white">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-white pt-16 lg:pt-0">
       <div className="w-full max-w-3xl mx-auto flex flex-col items-center justify-center py-16">
         {/* Hero Section */}
         <CrestIcon />
@@ -61,10 +61,10 @@ export default function Landing() {
       {/* Testimonial/Trust Section */}
       <div className="mb-4 w-full max-w-2xl bg-white rounded-lg p-8 border border-[#e5e7eb] shadow-sm flex flex-col items-center">
         <p className="italic text-lg text-center mb-2" style={{ color: '#2563eb', fontFamily: 'serif' }}>
-          “Gilded Grove is the future of inventory management. Finally, a platform that feels as secure and modern as a Swiss vault.”
+          &ldquo;Gilded Grove is the future of inventory management. Finally, a platform that feels as secure and modern as a Swiss vault.&rdquo;
         </p>
         <span className="text-sm text-gray-500">— Private Client, New York</span>
       </div>
-    </main>
+    </div>
   );
 }

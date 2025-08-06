@@ -1,21 +1,28 @@
-"use client";
-import { useState, useEffect } from "react";
+'use client';
+
+import { Settings } from 'lucide-react';
+
+const SettingsIcon = () => (
+  <Settings className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.5]" />
+);
 
 export default function SettingsPage() {
-  const [darkMode, setDarkMode] = useState(false);
-  useEffect(() => {
-    const stored = localStorage.getItem("gg_dark_mode");
-    if (stored) setDarkMode(stored === "true");
-  }, []);
   return (
-    <main className={
-      `min-h-screen flex items-center justify-center ` +
-      (darkMode ? "bg-[#18191a]" : "bg-[#f4f5f7]")
-    }>
-      <div className={`w-full max-w-2xl rounded-3xl shadow-xl p-8 border flex flex-col min-h-[60vh] ` + (darkMode ? "bg-[#23272f] border-[#35373b]" : "bg-[#fcfcfd] border-[#ececec]")}>
-        <h1 className={`text-3xl font-serif font-bold tracking-tight mb-4 ` + (darkMode ? "text-[#f7f8fa]" : "text-gray-900")}>Settings</h1>
-        <p className={darkMode ? "text-gray-400 text-lg" : "text-gray-500 text-lg"}>Manage your account and preferences here. This is a placeholder page.</p>
+    <div className="min-h-screen bg-[#f4f5f7] pt-16 lg:pt-0">
+      <div className="flex flex-col items-center py-12 px-4">
+        <div className="w-full max-w-2xl rounded-3xl shadow-xl p-8 border bg-[#fcfcfd] border-[#ececec]">
+          <header className="mb-8 text-center flex flex-col items-center">
+            <div className="flex items-center justify-center mb-2">
+              <SettingsIcon />
+              <h1 className="text-3xl font-serif font-bold tracking-tight text-gray-900">Settings</h1>
+            </div>
+            <p className="text-gray-500 text-lg">Configure your account and preferences.</p>
+          </header>
+          <div className="text-center text-gray-600">
+            <p>Settings features coming soon...</p>
+          </div>
+        </div>
       </div>
-    </main>
+    </div>
   );
 } 
