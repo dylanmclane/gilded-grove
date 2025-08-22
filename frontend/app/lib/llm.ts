@@ -63,7 +63,7 @@ export class HuggingFaceProvider implements LLMProvider {
     
     // Pick a random response from the appropriate category
     const category = this.getResponseCategory(lowerPrompt);
-    const categoryResponses = responses[category] || responses.general;
+    const categoryResponses = (responses as Record<string, string[]>)[category] || responses.general;
     
     return categoryResponses[Math.floor(Math.random() * categoryResponses.length)];
   }
@@ -83,7 +83,6 @@ export class HuggingFaceProvider implements LLMProvider {
 
   private getResponseVariations(prompt: string, context?: string) {
     const hasAssets = context && context.includes('Current assets:');
-    const assetCount = hasAssets ? (context.match(/Current assets:/g) || []).length : 0;
     
     // Extract asset details for more specific responses
     let assetDetails = '';
