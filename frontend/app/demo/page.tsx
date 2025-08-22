@@ -58,38 +58,52 @@ export default function DemoEstateMVP() {
 
   async function handleAISubmit(e: React.FormEvent) {
     e.preventDefault();
+    e.stopPropagation();
+    
     if (!aiInput.trim()) return;
     
     setIsLoading(true);
     setAiResponse(null);
     
     try {
+      console.log('Sending AI request:', { prompt: aiInput, provider: currentProvider });
+      
       // Create context from current assets
       const assetContext = assets.length > 0 
-        ? `Current assets: ${assets.map(a => `${a.name} (${a.type}) - ${a.value}`).join(', ')}`
+        ? `Current assets: ${assets.map(a => `${a.name} (${a.type}) - ${a.value} - Location: ${a.location}`).join(', ')}`
         : undefined;
+      
+      const requestBody = {
+        prompt: aiInput,
+        context: assetContext,
+        provider: currentProvider
+      };
+      
+      console.log('Request body:', requestBody);
       
       const apiResponse = await fetch('/api/ai', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          prompt: aiInput,
-          context: assetContext,
-          provider: currentProvider
-        }),
+        body: JSON.stringify(requestBody),
       });
 
+      console.log('Response status:', apiResponse.status);
+      console.log('Response headers:', Object.fromEntries(apiResponse.headers.entries()));
+
       if (!apiResponse.ok) {
-        throw new Error(`HTTP error! status: ${apiResponse.status}`);
+        const errorText = await apiResponse.text();
+        console.error('API Error Response:', errorText);
+        throw new Error(`HTTP error! status: ${apiResponse.status}, body: ${errorText}`);
       }
 
       const data = await apiResponse.json();
+      console.log('AI Response data:', data);
       setAiResponse(data.response);
     } catch (error) {
       console.error('AI response error:', error);
-      setAiResponse("I'm sorry, I'm having trouble connecting right now. Please try again in a moment.");
+      setAiResponse(`Error: ${error instanceof Error ? error.message : 'Unknown error occurred'}`);
     } finally {
       setIsLoading(false);
       setAiInput("");
@@ -236,7 +250,7 @@ export default function DemoEstateMVP() {
                 ))}
               </select>
             </div>
-            <form onSubmit={handleAISubmit} className="flex gap-2">
+            <form onSubmit={handleAISubmit} className="flex gap-2" noValidate>
               <input
                 className={`flex-1 rounded-xl border px-4 py-2 focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] bg-white text-gray-900 placeholder:text-gray-500'}`}
                 placeholder="Ask about your assets..."
