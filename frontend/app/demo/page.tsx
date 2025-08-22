@@ -5,6 +5,7 @@ import Link from "next/link";
 import { 
   LayoutDashboard
 } from 'lucide-react';
+import { llmService } from '../lib/llm';
 
 // Icon components with consistent styling
 const DashboardIcon = () => (
@@ -30,7 +31,9 @@ export default function DemoEstateMVP() {
   const [form, setForm] = useState<Partial<Asset>>({});
   const [aiInput, setAiInput] = useState("");
   const [aiResponse, setAiResponse] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [currentProvider, setCurrentProvider] = useState(llmService.getCurrentProvider());
 
   // Optional: persist dark mode in localStorage
   useEffect(() => {
@@ -53,12 +56,53 @@ export default function DemoEstateMVP() {
     }
   }
 
-  function handleAISubmit(e: React.FormEvent) {
+  async function handleAISubmit(e: React.FormEvent) {
     e.preventDefault();
-    setAiResponse(
-      `I'm your estate assistant. (This is a demo response for: "${aiInput}")`
-    );
-    setAiInput("");
+    if (!aiInput.trim()) return;
+    
+    setIsLoading(true);
+    setAiResponse(null);
+    
+    try {
+      // Create context from current assets
+      const assetContext = assets.length > 0 
+        ? `Current assets: ${assets.map(a => `${a.name} (${a.type}) - ${a.value}`).join(', ')}`
+        : undefined;
+      
+      const apiResponse = await fetch('/api/ai', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prompt: aiInput,
+          context: assetContext,
+          provider: currentProvider
+        }),
+      });
+
+      if (!apiResponse.ok) {
+        throw new Error(`HTTP error! status: ${apiResponse.status}`);
+      }
+
+      const data = await apiResponse.json();
+      setAiResponse(data.response);
+    } catch (error) {
+      console.error('AI response error:', error);
+      setAiResponse("I'm sorry, I'm having trouble connecting right now. Please try again in a moment.");
+    } finally {
+      setIsLoading(false);
+      setAiInput("");
+    }
+  }
+
+  function handleProviderChange(provider: string) {
+    try {
+      llmService.setProvider(provider);
+      setCurrentProvider(provider);
+    } catch (error) {
+      console.error('Provider change error:', error);
+    }
   }
 
   return (
@@ -178,17 +222,36 @@ export default function DemoEstateMVP() {
           )}
           {/* AI Assistant */}
           <div className={`mt-8 rounded-2xl shadow-sm border p-6 ${darkMode ? 'border-[#35373b] bg-[#23272f]' : 'border-[#ececec] bg-[#fafafd]'}`}>
-            <h3 className={`text-lg font-semibold mb-4 ${darkMode ? 'text-[#f7f8fa]' : 'text-gray-900'}`}>AI Assistant</h3>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className={`text-lg font-semibold ${darkMode ? 'text-[#f7f8fa]' : 'text-gray-900'}`}>AI Assistant</h3>
+              <select
+                value={currentProvider}
+                onChange={(e) => handleProviderChange(e.target.value)}
+                className={`text-sm rounded-lg px-2 py-1 border ${darkMode ? 'bg-[#18191a] text-[#f7f8fa] border-[#35373b]' : 'bg-white text-gray-900 border-[#ececec]'}`}
+              >
+                {llmService.getAvailableProviders().map(provider => (
+                  <option key={provider} value={provider}>
+                    {llmService.getProviderInfo(provider)?.name || provider}
+                  </option>
+                ))}
+              </select>
+            </div>
             <form onSubmit={handleAISubmit} className="flex gap-2">
               <input
                 className={`flex-1 rounded-xl border px-4 py-2 focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] bg-white text-gray-900 placeholder:text-gray-500'}`}
                 placeholder="Ask about your assets..."
                 value={aiInput}
                 onChange={e => setAiInput(e.target.value)}
+                disabled={isLoading}
                 style={{ minHeight: 44, fontSize: 16 }}
               />
-              <button type="submit" className={`rounded-xl px-6 py-2 font-semibold shadow transition ${darkMode ? 'bg-[#007aff] text-white hover:bg-[#005ecb]' : 'bg-[#007aff] text-white hover:bg-[#005ecb]'}`} style={{ minHeight: 44, fontSize: 16 }}>
-                Ask
+              <button 
+                type="submit" 
+                disabled={isLoading || !aiInput.trim()}
+                className={`rounded-xl px-6 py-2 font-semibold shadow transition ${darkMode ? 'bg-[#007aff] text-white hover:bg-[#005ecb] disabled:bg-[#35373b] disabled:text-gray-500' : 'bg-[#007aff] text-white hover:bg-[#005ecb] disabled:bg-gray-300 disabled:text-gray-500'}`} 
+                style={{ minHeight: 44, fontSize: 16 }}
+              >
+                {isLoading ? 'Thinking...' : 'Ask'}
               </button>
             </form>
             {aiResponse && (
