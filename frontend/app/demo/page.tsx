@@ -149,42 +149,68 @@ export default function DemoEstateMVP() {
             <p className={darkMode ? "text-gray-400 text-lg" : "text-gray-500 text-lg"}>A clean, modern dashboard for managing your estate&apos;s assets.</p>
           </header>
           {/* Common Access Buttons */}
-          <div className="flex justify-center gap-4 mb-8 flex-wrap">
+          <div className="grid grid-cols-2 sm:flex sm:justify-center gap-3 sm:gap-4 mb-8">
             <Link href="/demo/assets">
-              <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Assets</button>
+              <button className={`w-full sm:w-auto rounded-xl px-4 sm:px-5 py-3 sm:py-2 font-semibold shadow-sm transition border text-sm sm:text-base ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Assets</button>
             </Link>
             <Link href="/demo/documents">
-              <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Documents</button>
+              <button className={`w-full sm:w-auto rounded-xl px-4 sm:px-5 py-3 sm:py-2 font-semibold shadow-sm transition border text-sm sm:text-base ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Documents</button>
             </Link>
             <Link href="/demo/contacts">
-              <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Contacts</button>
+              <button className={`w-full sm:w-auto rounded-xl px-4 sm:px-5 py-3 sm:py-2 font-semibold shadow-sm transition border text-sm sm:text-base ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Contacts</button>
             </Link>
             <Link href="/demo/reports">
-              <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Reports</button>
+              <button className={`w-full sm:w-auto rounded-xl px-4 sm:px-5 py-3 sm:py-2 font-semibold shadow-sm transition border text-sm sm:text-base ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Reports</button>
             </Link>
           </div>
-          {/* Asset Table */}
-          <div className={`overflow-x-auto rounded-2xl shadow-sm mb-8 border ${darkMode ? 'border-[#35373b] bg-[#23272f]' : 'border-[#ececec] bg-[#fafafd]'}`}>
-            <table className="table w-full">
-              <thead>
-                <tr className={darkMode ? "bg-[#23272f] text-gray-300" : "bg-[#f2f2f7] text-gray-700"}>
-                  <th className="py-3">Name</th>
-                  <th>Type</th>
-                  <th>Value</th>
-                  <th>Location</th>
-                </tr>
-              </thead>
-              <tbody>
-                {assets.map(asset => (
-                  <tr key={asset.id} className={darkMode ? "hover:bg-[#18191a] transition" : "hover:bg-[#f2f2f7] transition"}>
-                    <td className={`font-medium py-2 ${darkMode ? 'text-[#f7f8fa]' : 'text-gray-900'}`}>{asset.name}</td>
-                    <td className={darkMode ? 'text-gray-300' : 'text-gray-700'}>{asset.type}</td>
-                    <td className={darkMode ? 'text-gray-300' : 'text-gray-700'}>{asset.value}</td>
-                    <td className={darkMode ? 'text-gray-300' : 'text-gray-700'}>{asset.location}</td>
+          {/* Asset Display - Mobile Cards / Desktop Table */}
+          <div className="mb-8">
+            {/* Mobile Card Layout */}
+            <div className="block sm:hidden space-y-3">
+              {assets.map(asset => (
+                <div key={asset.id} className={`rounded-2xl shadow-sm border p-4 ${darkMode ? 'border-[#35373b] bg-[#23272f]' : 'border-[#ececec] bg-[#fafafd]'}`}>
+                  <div className={`font-medium text-lg mb-2 ${darkMode ? 'text-[#f7f8fa]' : 'text-gray-900'}`}>{asset.name}</div>
+                  <div className="grid grid-cols-2 gap-2 text-sm">
+                    <div>
+                      <span className={darkMode ? 'text-gray-400' : 'text-gray-500'}>Type:</span>
+                      <div className={darkMode ? 'text-gray-300' : 'text-gray-700'}>{asset.type}</div>
+                    </div>
+                    <div>
+                      <span className={darkMode ? 'text-gray-400' : 'text-gray-500'}>Value:</span>
+                      <div className={darkMode ? 'text-gray-300' : 'text-gray-700'}>{asset.value}</div>
+                    </div>
+                    <div className="col-span-2">
+                      <span className={darkMode ? 'text-gray-400' : 'text-gray-500'}>Location:</span>
+                      <div className={darkMode ? 'text-gray-300' : 'text-gray-700'}>{asset.location}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Desktop Table Layout */}
+            <div className={`hidden sm:block overflow-x-auto rounded-2xl shadow-sm border ${darkMode ? 'border-[#35373b] bg-[#23272f]' : 'border-[#ececec] bg-[#fafafd]'}`}>
+              <table className="table w-full">
+                <thead>
+                  <tr className={darkMode ? "bg-[#23272f] text-gray-300" : "bg-[#f2f2f7] text-gray-700"}>
+                    <th className="py-3">Name</th>
+                    <th>Type</th>
+                    <th>Value</th>
+                    <th>Location</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {assets.map(asset => (
+                    <tr key={asset.id} className={darkMode ? "hover:bg-[#18191a] transition" : "hover:bg-[#f2f2f7] transition"}>
+                      <td className={`font-medium py-2 ${darkMode ? 'text-[#f7f8fa]' : 'text-gray-900'}`}>{asset.name}</td>
+                      <td className={darkMode ? 'text-gray-300' : 'text-gray-700'}>{asset.type}</td>
+                      <td className={darkMode ? 'text-gray-300' : 'text-gray-700'}>{asset.value}</td>
+                      <td className={darkMode ? 'text-gray-300' : 'text-gray-700'}>{asset.location}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
           {showForm && (
             <form onSubmit={handleSaveAsset} className={`rounded-2xl shadow p-6 max-w-md mx-auto mb-8 border ${darkMode ? 'bg-[#18191a] border-[#35373b]' : 'bg-[#f7f8fa] border-[#ececec]'}`}>
@@ -250,20 +276,20 @@ export default function DemoEstateMVP() {
                 ))}
               </select>
             </div>
-            <form onSubmit={handleAISubmit} className="flex gap-2" noValidate>
+            <form onSubmit={handleAISubmit} className="flex flex-col sm:flex-row gap-2" noValidate>
               <input
-                className={`flex-1 rounded-xl border px-4 py-2 focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] bg-white text-gray-900 placeholder:text-gray-500'}`}
+                className={`flex-1 rounded-xl border px-4 py-3 sm:py-2 focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] bg-white text-gray-900 placeholder:text-gray-500'}`}
                 placeholder="Ask about your assets..."
                 value={aiInput}
                 onChange={e => setAiInput(e.target.value)}
                 disabled={isLoading}
-                style={{ minHeight: 44, fontSize: 16 }}
+                style={{ minHeight: 48, fontSize: 16 }}
               />
               <button 
                 type="submit" 
                 disabled={isLoading || !aiInput.trim()}
-                className={`rounded-xl px-6 py-2 font-semibold shadow transition ${darkMode ? 'bg-[#007aff] text-white hover:bg-[#005ecb] disabled:bg-[#35373b] disabled:text-gray-500' : 'bg-[#007aff] text-white hover:bg-[#005ecb] disabled:bg-gray-300 disabled:text-gray-500'}`} 
-                style={{ minHeight: 44, fontSize: 16 }}
+                className={`rounded-xl px-6 py-3 sm:py-2 font-semibold shadow transition ${darkMode ? 'bg-[#007aff] text-white hover:bg-[#005ecb] disabled:bg-[#35373b] disabled:text-gray-500' : 'bg-[#007aff] text-white hover:bg-[#005ecb] disabled:bg-gray-300 disabled:text-gray-500'}`} 
+                style={{ minHeight: 48, fontSize: 16 }}
               >
                 {isLoading ? 'Thinking...' : 'Ask'}
               </button>

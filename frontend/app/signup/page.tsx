@@ -69,10 +69,10 @@ export default function Signup() {
     <div className="min-h-screen w-full flex items-center justify-center px-4 pt-16 lg:pt-0" style={{ background: 'linear-gradient(135deg, #181b2c 0%, #23243a 100%)' }}>
       <div className="w-full max-w-sm flex flex-col items-center justify-center flex-grow">
         <CrestIcon />
-        <h1 className="text-3xl md:text-4xl font-extrabold text-center mb-8 tracking-tight whitespace-nowrap" style={{ fontFamily: 'serif', color: '#d4af37', letterSpacing: '-0.01em' }}>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center mb-8 tracking-tight" style={{ fontFamily: 'serif', color: '#d4af37', letterSpacing: '-0.01em' }}>
           Request Private Invitation
         </h1>
-        <div className="w-full bg-[#181b2c] rounded-2xl p-8 shadow-2xl border border-[#d4af37]/60 relative overflow-hidden" style={{ boxShadow: '0 0 32px 0 #d4af3722' }}>
+        <div className="w-full bg-[#181b2c] rounded-2xl p-6 sm:p-8 shadow-2xl border border-[#d4af37]/60 relative overflow-hidden" style={{ boxShadow: '0 0 32px 0 #d4af3722' }}>
           {submitted && <Confetti />}
           {submitted ? (
             <div className="text-center py-10 relative z-10">
