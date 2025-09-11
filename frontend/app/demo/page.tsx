@@ -236,12 +236,12 @@ export default function DemoEstateMVP() {
           )}
           {/* AI Assistant */}
           <div className={`mt-8 rounded-2xl shadow-sm border p-6 ${darkMode ? 'border-[#35373b] bg-[#23272f]' : 'border-[#ececec] bg-[#fafafd]'}`}>
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-4">
               <h3 className={`text-lg font-semibold ${darkMode ? 'text-[#f7f8fa]' : 'text-gray-900'}`}>AI Assistant</h3>
               <select
                 value={currentProvider}
                 onChange={(e) => handleProviderChange(e.target.value)}
-                className={`text-sm rounded-lg px-2 py-1 border ${darkMode ? 'bg-[#18191a] text-[#f7f8fa] border-[#35373b]' : 'bg-white text-gray-900 border-[#ececec]'}`}
+                className={`text-sm rounded-lg px-3 py-2 border w-full sm:w-auto ${darkMode ? 'bg-[#18191a] text-[#f7f8fa] border-[#35373b]' : 'bg-white text-gray-900 border-[#ececec]'}`}
               >
                 {llmService.getAvailableProviders().map(provider => (
                   <option key={provider} value={provider}>
@@ -252,25 +252,25 @@ export default function DemoEstateMVP() {
             </div>
             <form onSubmit={handleAISubmit} className="flex flex-col sm:flex-row gap-2" noValidate>
               <input
-                className={`flex-1 rounded-xl border px-4 py-2 focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] bg-white text-gray-900 placeholder:text-gray-500'}`}
+                className={`flex-1 rounded-xl border px-4 py-3 sm:py-2 focus:border-[#007aff] focus:ring-2 focus:ring-[#007aff] placeholder:text-gray-400 ${darkMode ? 'border-[#35373b] bg-[#23272f] text-[#f7f8fa] placeholder:text-gray-500' : 'border-[#ececec] bg-white text-gray-900 placeholder:text-gray-500'}`}
                 placeholder="Ask about your assets..."
                 value={aiInput}
                 onChange={e => setAiInput(e.target.value)}
                 disabled={isLoading}
-                style={{ minHeight: 44, fontSize: 16 }}
+                style={{ minHeight: 48, fontSize: 16 }}
               />
               <button 
                 type="submit" 
                 disabled={isLoading || !aiInput.trim()}
-                className={`rounded-xl px-6 py-2 font-semibold shadow transition ${darkMode ? 'bg-[#007aff] text-white hover:bg-[#005ecb] disabled:bg-[#35373b] disabled:text-gray-500' : 'bg-[#007aff] text-white hover:bg-[#005ecb] disabled:bg-gray-300 disabled:text-gray-500'}`} 
-                style={{ minHeight: 44, fontSize: 16 }}
+                className={`rounded-xl px-6 py-3 sm:py-2 font-semibold shadow transition ${darkMode ? 'bg-[#007aff] text-white hover:bg-[#005ecb] disabled:bg-[#35373b] disabled:text-gray-500' : 'bg-[#007aff] text-white hover:bg-[#005ecb] disabled:bg-gray-300 disabled:text-gray-500'}`} 
+                style={{ minHeight: 48, fontSize: 16 }}
               >
                 {isLoading ? 'Thinking...' : 'Ask'}
               </button>
             </form>
             {aiResponse && (
               <div className={`mt-4 p-4 rounded-xl ${darkMode ? 'bg-[#18191a] border border-[#35373b]' : 'bg-white border border-[#ececec]'}`}>
-                <p className={darkMode ? 'text-gray-300' : 'text-gray-700'}>{aiResponse}</p>
+                <p className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} leading-relaxed`}>{aiResponse}</p>
               </div>
             )}
           </div>
