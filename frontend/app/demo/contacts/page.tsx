@@ -1,21 +1,12 @@
 'use client';
 
-import { Users } from 'lucide-react';
-
-const ContactsIcon = () => (
-  <Users className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.5]" />
-);
-
 export default function ContactsPage() {
   return (
     <div className="min-h-screen bg-[#f4f5f7] pt-16 lg:pt-0">
       <div className="flex flex-col items-center py-12 px-4">
         <div className="w-full max-w-2xl rounded-3xl shadow-xl p-8 border bg-[#fcfcfd] border-[#ececec]">
           <header className="mb-8 text-center flex flex-col items-center">
-            <div className="flex items-center justify-center mb-2">
-              <ContactsIcon />
-              <h1 className="text-3xl font-serif font-bold tracking-tight text-gray-900">Contacts</h1>
-            </div>
+            <h1 className="text-3xl font-serif font-bold tracking-tight text-gray-900 mb-2">Contacts</h1>
             <p className="text-gray-500 text-lg">Manage your trusted contacts and advisors.</p>
           </header>
           <div className="text-center text-gray-600">
