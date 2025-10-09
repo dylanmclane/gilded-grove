@@ -13,19 +13,10 @@ export default function ConditionalNavigation() {
     return null;
   }
   
-  return (
-    <>
-      <Navigation />
-      <style jsx global>{`
-        main {
-          margin-left: 0;
-        }
-        @media (min-width: 1024px) {
-          main {
-            margin-left: 16rem;
-          }
-        }
-      `}</style>
-    </>
-  );
+  return <Navigation />;
+}
+
+// Export a function to check if navigation should be shown
+export function shouldShowNavigation(pathname: string) {
+  return pathname.startsWith('/demo');
 }

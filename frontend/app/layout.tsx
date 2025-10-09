@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import ConditionalNavigation from "./components/ConditionalNavigation";
+import MainWrapper from "./components/MainWrapper";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,9 +30,9 @@ export default function RootLayout({
     <html lang="en" data-theme="dark" className={`${inter.variable} ${playfair.variable}`}>
       <body className="antialiased font-sans">
         <ConditionalNavigation />
-        <main>
+        <MainWrapper>
           {children}
-        </main>
+        </MainWrapper>
       </body>
     </html>
   );
