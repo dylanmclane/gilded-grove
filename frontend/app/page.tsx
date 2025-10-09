@@ -15,7 +15,7 @@ const DemoEstateMVP = dynamic(() => import('./demo/page').then(mod => mod.defaul
 
 export default function Landing() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-white pt-16 lg:pt-0">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-white">
       <div className="w-full max-w-3xl mx-auto flex flex-col items-center justify-center py-16">
         {/* Hero Section */}
         <CrestIcon />

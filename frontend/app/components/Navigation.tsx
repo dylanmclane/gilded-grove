@@ -12,7 +12,7 @@ import {
   Settings, 
   Menu, 
   X,
-  Home
+  Briefcase
 } from 'lucide-react';
 
 // Icon components with consistent styling
@@ -34,8 +34,8 @@ const ReportsIcon = () => (
 const SettingsIcon = () => (
   <Settings className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.5]" />
 );
-const HomeIcon = () => (
-  <Home className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.5]" />
+const JobsIcon = () => (
+  <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.5]" />
 );
 const HamburgerIcon = ({ open }: { open: boolean }) => (
   <div className="text-[#d6b86b]">
@@ -48,11 +48,11 @@ const HamburgerIcon = ({ open }: { open: boolean }) => (
 );
 
 const navLinks = [
-  { label: "Home", icon: HomeIcon, href: "/" },
   { label: "Dashboard", icon: DashboardIcon, href: "/demo" },
   { label: "Assets", icon: AssetsIcon, href: "/demo/assets" },
   { label: "Documents", icon: DocumentsIcon, href: "/demo/documents" },
   { label: "Contacts", icon: ContactsIcon, href: "/demo/contacts" },
+  { label: "Jobs", icon: JobsIcon, href: "/demo/jobs" },
   { label: "Reports", icon: ReportsIcon, href: "/demo/reports" },
   { label: "Settings", icon: SettingsIcon, href: "/demo/settings" },
 ] as const;

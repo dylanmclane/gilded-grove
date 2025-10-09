@@ -131,7 +131,7 @@ export default function DemoEstateMVP() {
 
       {/* Main Dashboard Content */}
       <div className={`flex flex-col items-center py-12 px-4 ${darkMode ? "bg-[#18191a]" : "bg-[#f4f5f7]"}`}>
-        <div className={`w-full max-w-2xl rounded-3xl shadow-xl p-8 border flex flex-col min-h-[80vh] ${darkMode ? "bg-[#23272f] border-[#35373b]" : "bg-[#fcfcfd] border-[#ececec]"}`} style={{ boxShadow: '0 8px 32px 0 rgba(0,0,0,0.08)' }}>
+        <div className={`w-full max-w-6xl rounded-3xl shadow-xl p-8 border flex flex-col min-h-[80vh] ${darkMode ? "bg-[#23272f] border-[#35373b]" : "bg-[#fcfcfd] border-[#ececec]"}`} style={{ boxShadow: '0 8px 32px 0 rgba(0,0,0,0.08)' }}>
           {/* Dashboard Header */}
           <header className="mb-8 text-center flex flex-col items-center">
             <h1 className={`text-3xl font-serif font-bold tracking-tight mb-2 ${darkMode ? "text-[#f7f8fa]" : "text-gray-900"}`}>The Greenwood Family Dashboard</h1>
@@ -147,6 +147,9 @@ export default function DemoEstateMVP() {
             </Link>
             <Link href="/demo/contacts">
               <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Contacts</button>
+            </Link>
+            <Link href="/demo/jobs">
+              <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Jobs</button>
             </Link>
             <Link href="/demo/reports">
               <button className={`rounded-xl px-5 py-2 font-semibold shadow-sm transition border ${darkMode ? 'bg-[#23272f] text-[#f7f8fa] border-[#35373b] hover:bg-[#18191a]' : 'bg-[#f2f2f7] text-gray-800 border-[#ececec] hover:bg-[#e5e5ea]'}`}>Reports</button>
