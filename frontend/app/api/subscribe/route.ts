@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
 
     // Always send admin notification (using Resend for now since it works)
     try {
-      const { Resend } = require('resend');
+      const { Resend } = await import('resend');
       const resend = new Resend(process.env.RESEND_API_KEY);
       
       await resend.emails.send({
@@ -98,7 +98,7 @@ export async function POST(request: NextRequest) {
                <p>Please follow up with this potential customer.</p>`
       });
       console.log('Admin notification sent via Resend');
-    } catch (adminEmailError) {
+    } catch {
       console.log('Admin email not sent');
     }
 
