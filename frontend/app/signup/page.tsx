@@ -16,17 +16,6 @@ const CrestIcon = () => (
   </div>
 );
 
-const Confetti = () => (
-  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-    <svg width="120" height="60" viewBox="0 0 120 60" fill="none">
-      <circle cx="20" cy="20" r="3" fill="#ffe066"/>
-      <circle cx="60" cy="10" r="2" fill="#d4af37"/>
-      <circle cx="100" cy="30" r="2.5" fill="#fffbe6"/>
-      <circle cx="40" cy="50" r="2" fill="#bfa14a"/>
-      <circle cx="80" cy="40" r="2.5" fill="#e0c97f"/>
-    </svg>
-  </div>
-);
 
 export default function Signup() {
   const [firstName, setFirstName] = useState('');
@@ -73,7 +62,6 @@ export default function Signup() {
           Request Private Invitation
         </h1>
         <div className="w-full bg-[#181b2c] rounded-2xl p-8 shadow-2xl border border-[#d4af37]/60 relative overflow-hidden" style={{ boxShadow: '0 0 32px 0 #d4af3722' }}>
-          {submitted && <Confetti />}
           {submitted ? (
             <div className="text-center py-10 relative z-10">
               <h2 className="text-2xl font-semibold mb-2" style={{ color: '#d4af37', fontFamily: 'serif' }}>Thank you for your interest!</h2>
